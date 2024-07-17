@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate
 from KasuwanDauriInventory.helpers import renderResponse
+from KasuwanDauriInventory.permission import IsSuperAdmin
 from UserServices.models import Users
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -74,10 +75,19 @@ class PublicAPIView(APIView):
     def get(self, request):
         return renderResponse(data='This is a public API', message='This is a public API', status=status.HTTP_400_BAD_REQUEST)
 
-
 class ProtectedAPIView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        return renderResponse(data='This is a protected API', message='This is a protected API', status=status.HTTP_400_BAD_REQUEST)
+        return renderResponse(data='This is a Protected API', message='This is a protected API', status=status.HTTP_400_BAD_REQUEST)
+
+
+class SuperAdminCheckApi(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated,IsSuperAdmin]
+
+    def get(self, request):
+        return renderResponse(data='This is Super Admin API', message='This is a Super Admin API', status=status.HTTP_400_BAD_REQUEST)
+
+
