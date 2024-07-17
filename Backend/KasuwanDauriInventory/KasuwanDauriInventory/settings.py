@@ -45,7 +45,17 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders', 
+    'drf_yasg',
 ]
+SWAGGER_SETTINGS = {
+   'SECURITY_DEFINITIONS': {
+      'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+      }
+   }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -58,6 +68,10 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
+REST_FRAMEWORK = {
+    'EXCEPTION_HANDLER': 'KasuwanDauriInventory.helpers.custom_exception_handler',
+    
+}
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
   
@@ -68,7 +82,7 @@ ROOT_URLCONF = 'KasuwanDauriInventory.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],  # Added templates directory
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
