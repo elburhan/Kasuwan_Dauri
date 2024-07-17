@@ -36,6 +36,10 @@ class Users(AbstractUser):
     def defaultkey():
         return 'username'
     
+    def save(self, *args, **kwargs):
+        if not self.domain_user_id and self.id:
+            self.domain_user_id=Users.objects.get(id=self.id)
+        super().save(*args, **kwargs)
 
 class UserShippingAddress(models.Model):
     id=models.AutoField(primary_key=True)

@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate
+from KasuwanDauriInventory.helpers import renderResponse
 from UserServices.models import Users
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -15,10 +16,19 @@ class SignupAPIView(APIView):
         password=request.data.get('password')
         profile_pic=request.data.get('profile_pic')
 
-        if username is None or email is None or password is None:
-            return Response ({'error': 'Please provide username, email and password'}, status=status.HTTP_400_BAD_REQUEST)
+        emailCheck=Users.objects.filter(email=email)
+        if emailCheck.exists():
+            return renderResponse(data='Email already exists', message='Email Already exist' , status=status.HTTP_400_BAD_REQUEST)
         
+        usernameCheck=Users.objects.filter(username=username)
+        if usernameCheck.exists():
+            return renderResponse(data='Username already exists', message='Username Already exist', status=status.HTTP_400_BAD_REQUEST)
+
+        if username is None or email is None or password is None:
+            return renderResponse(data='Please provide username, email and password', message='Please provide username, email and password', status=status.HTTP_400_BAD_REQUEST)
         user=Users.objects.create_user(username=username,email=email,password=password,profile_pic=profile_pic)
+        if request.data.get('domain_user_id'):
+            user.domain_user_id=Users.objects.get(id=request.data.get('domain_user_id'))
         user.save()
         refresh = RefreshToken.for_user(user)
         access = refresh.access_token
@@ -36,7 +46,8 @@ class LoginAPIView(APIView):
         password = request.data.get('password')
 
         if username is None or password is None:
-            return Response({'error': 'Please provide both username and password'}, status=status.HTTP_400_BAD_REQUEST)
+            return renderResponse(data='Please provide both username and password', message='Please provide both username and password', status=status.HTTP_400_BAD_REQUEST)
+
 
         user = authenticate(request, username=username, password=password)
         if user:
@@ -51,15 +62,17 @@ class LoginAPIView(APIView):
                 'access': str(access),
             })
         else:
-            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+            return renderResponse(data='Invalid credentials', message='Invalid credentials', status=status.HTTP_400_BAD_REQUEST)
         
     def get(self, request):
-        return Response({'message': 'Please use POST method to login'}, status=status.HTTP_200_OK)
+        return renderResponse(data='Please use POST method to login', message='Please use POST method to login', status=status.HTTP_400_BAD_REQUEST)
+
+    
 
 
 class PublicAPIView(APIView):
     def get(self, request):
-        return Response({'message': 'This is a public API'})
+        return renderResponse(data='This is a public API', message='This is a public API', status=status.HTTP_400_BAD_REQUEST)
 
 
 class ProtectedAPIView(APIView):
@@ -67,4 +80,4 @@ class ProtectedAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        return Response({'message': 'This is a protected API'}, status=200)
+        return renderResponse(data='This is a protected API', message='This is a protected API', status=status.HTTP_400_BAD_REQUEST)
