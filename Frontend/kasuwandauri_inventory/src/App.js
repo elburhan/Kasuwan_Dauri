@@ -6,24 +6,34 @@ import 'react-toastify/dist/ReactToastify.css';
 import ProtectedRoute from './utils/ProtectedRoute';
 import { ToastContainer } from 'react-toastify';
 import Auth from './pages/Auth';
+import { useState } from 'react';
+import store from './redux/store/store';
+import { useDispatch } from 'react-redux';
+import { Provider } from 'react-redux';
+import { fetchSidebar } from './redux/reducer/sidebardata';
+import { useEffect,useReact } from 'react';
 
-const sidebarItems = [
-  { name: 'Home', link: '/home', icon: 'home' },
-  { name: 'Products', link: '/products', icon: 'products' },
-  { name: 'Orders', link: '/orders', icon: 'orders' },
-  { name: 'Users', link: '/users', icon: 'users' },
-  { name: 'Settings', link: '/settings', icon: 'settings' },
-  { 
-    name: 'Categories', 
-    icon: 'categories', 
-    children: [
-      { name: 'All Categories', link: '/categories' },
-      { name: 'Add Category', link: '/categories/add' }
-    ]
-  }
-];
+
+
 
 function App() {
+  const 
+  const sidebarItems = [
+    { name: 'Home', link: '/home', icon: 'home' },
+    { name: 'Products', link: '/products', icon: 'products' },
+    { name: 'Orders', link: '/orders', icon: 'orders' },
+    { name: 'Users', link: '/users', icon: 'users' },
+    { name: 'Settings', link: '/settings', icon: 'settings' },
+    { 
+      name: 'Categories', 
+      icon: 'categories', 
+      children: [
+        { name: 'All Categories', link: '/categories' },
+        { name: 'Add Category', link: '/categories/add' }
+      ]
+    }
+  ];
+
   return (
     <Router>
       <Routes>
