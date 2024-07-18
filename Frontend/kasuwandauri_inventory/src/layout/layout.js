@@ -8,6 +8,7 @@ import logo from '../assets/logo.svg';
 import { GlobalStyles } from './GlobalStyle';
 import TextField from '@mui/material/TextField';
 import { Outlet,useNavigate } from 'react-router-dom'; // Import Outlet
+import { expandItem } from '../redux/reducer/sidebardata';
 
 const Layout = ({sidebarList,pageTitle}) => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -117,6 +118,7 @@ const Layout = ({sidebarList,pageTitle}) => {
       sidebarItem.expanded=!sidebarItem.expanded;
       sidebarItems[index]=sidebarItem;
       setSidebarItems([...sidebarItems]) */
+      dispatch(expandItem({id:sidebarItem.id}))
     }
     else{
       navigate(sidebarItem.module_url);
