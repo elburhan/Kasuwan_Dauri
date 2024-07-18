@@ -20,6 +20,7 @@ const Layout = ({sidebarList,pageTitle}) => {
   const [themeMenu, setThemeMenu] = useState(null);
   const [sidebarItems, setSidebarItems] = useState(sidebarList);
   const navigate=useNavigate();
+  const dispatch = useDispatch();
   console.log(sidebarItems);
 
   useEffect(() => {
