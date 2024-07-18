@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const fetchSidebar = createAsyncThunk('data/fetchSidebar', async () => {
-    const response = await axios.get('http://localhost:8000/api/sidebar/');
+    const response = await axios.get('http://localhost:8000/api/getMenus/');
     return response.data.data;
 });
 

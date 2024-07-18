@@ -8,7 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import Auth from './pages/Auth';
 import { useState } from 'react';
 import store from './redux/store/store';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Provider } from 'react-redux';
 import { fetchSidebar } from './redux/reducer/sidebardata';
 import { useEffect,useReact } from 'react';
@@ -17,7 +17,8 @@ import { useEffect,useReact } from 'react';
 
 
 function App() {
-  const 
+  const {status,error,items}=useSelector(state=>state.sidebardata);
+  const dispatch=useDispatch();
   const sidebarItems = [
     { name: 'Home', link: '/home', icon: 'home' },
     { name: 'Products', link: '/products', icon: 'products' },
@@ -33,6 +34,13 @@ function App() {
       ]
     }
   ];
+
+  useEffect(() => {
+    if(status==='idle'){
+      dispatch(fetchSidebar());
+    }
+  }, [status,dispatch]);
+
 
   return (
     <Router>

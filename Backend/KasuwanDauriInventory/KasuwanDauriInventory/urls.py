@@ -3,9 +3,9 @@ from django.urls import path, include
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from UserServices.Controller.SidebarController import ModuleView
+from UserServices.Controller.SidebarController import ModuleView  # Import SidebarView
 from UserServices.Controller.DynamicFormController import DynamicFormController
-from UserServices.Controller.SuperAdminDynamicFormController import SuperAdminDynamicFormController  # Correct this line
+from UserServices.Controller.SuperAdminDynamicFormController import SuperAdminDynamicFormController
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -25,7 +25,8 @@ urlpatterns = [
     path('api/auth/', include('UserServices.urls')),
     path('api/getForm/<str:modelName>/', DynamicFormController.as_view(), name='dynamicForm'),
     path('api/superAdminForm/<str:modelName>/', SuperAdminDynamicFormController.as_view(), name='superadmindynamicForm'),
-    path('api/getMenus/',ModuleView.as_view(), name='sidebarmenu'),  # Correct this line
+    path('api/getMenus/', ModuleView.as_view(), name='sidebarmenu'),  # This line
+    path('api/sidebar/', ModuleView.as_view(), name='sidebar'),  # Added for sidebar
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
