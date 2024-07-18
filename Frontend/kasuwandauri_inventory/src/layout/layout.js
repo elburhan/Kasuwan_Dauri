@@ -112,7 +112,7 @@ const Layout = ({sidebarList,pageTitle}) => {
   };
 
   const drawerWidth = 280;
-  const handleSidebarMenuClick=(sidebarItem,index)=>{
+  const handleSidebarMenuClick=(sidebarItem)=>{
     if(sidebarItem.submenu && sidebarItem.submenu.length>0){
       dispatch(expandItem({id:sidebarItem.id}))
     }
@@ -175,9 +175,9 @@ const Layout = ({sidebarList,pageTitle}) => {
         
       </Box>
       <List sx={{ '& .MuiListItem-root': { transition: 'background-color 0.3s' } }}>
-        {sidebarItems.map((sidebarItem,index) => (
+        {sidebarItems.map((sidebarItem) => (
             <>
-            <ListItem key={index} onClick={()=>handleSidebarMenuClick(sidebarItem,index)} sx={{ '&.Mui-selected': { backgroundColor: theme.palette.action.selected }, '&:hover': { backgroundColor: theme.palette.primary.light,borderRadius:'10px' } }}>
+            <ListItem key={index} onClick={()=>handleSidebarMenuClick(sidebarItem)} sx={{ '&.Mui-selected': { backgroundColor: theme.palette.action.selected }, '&:hover': { backgroundColor: theme.palette.primary.light,borderRadius:'10px' } }}>
                 <ListItemIcon>
                     {getIcon(sidebarItem.module_icon)}
                 </ListItemIcon>
@@ -192,7 +192,7 @@ const Layout = ({sidebarList,pageTitle}) => {
                 <Collapse in={sidebarItem?.expanded} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
               {sidebarItem.submenu.map(child => (
-                            <ListItem button sx={{ pl: 4 }} key={child.module_name} onClick={()=>handleSidebarMenuClick(child,index)}>
+                            <ListItem button sx={{ pl: 4 }} key={child.module_name} onClick={()=>handleSidebarMenuClick(child)}>
                                 <ListItemIcon>
                                 <AlternateEmailIcon />
                                 </ListItemIcon>
