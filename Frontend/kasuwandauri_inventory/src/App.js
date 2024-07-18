@@ -46,7 +46,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/auth" element={<Auth />} />
-        <Route path="/" element={<Layout sidebarList={sidebarItems} />}>
+        <Route path="/" element={<Layout sidebarList={items} />}>
           <Route path="home" element={<ProtectedRoute element={<Home />} />} />
         </Route>
       </Routes>
