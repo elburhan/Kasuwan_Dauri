@@ -38,4 +38,5 @@ const sidebarSlice = createSlice({
     },
 });
 
+export const { expandItem } = sidebarSlice.actions;
 export default sidebarSlice.reducer;
