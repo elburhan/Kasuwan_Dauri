@@ -1,7 +1,7 @@
 from django.db.models import ForeignKey
 from rest_framework.response import Response
 from rest_framework.views import exception_handler
-from rest_framework.exceptions import AuthenticationFailed,NotAuthenticated
+from rest_framework.exceptions import AuthenticationFailed,NotAuthenticated,PermissionDenied
 
 def getDynamicFormModels():
     return {
@@ -91,4 +91,6 @@ def custom_exception_handler(exc, context):
         return renderResponse(data=response_data['errors'],message=response_data['message']['detail'],status=response.status_code)
     elif isinstance(exc,NotAuthenticated):
         return renderResponse(data='User is not authenticated',message='User is not authenticated',status=exc.status_code)
+    elif isinstance(exc,PermissionDenied):
+        return renderResponse(data="You don't have permission to access this page",message='Permission Denied',status=exc.status_code)
     return response
