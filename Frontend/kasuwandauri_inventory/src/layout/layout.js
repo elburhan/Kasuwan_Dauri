@@ -192,7 +192,7 @@ const Layout = ({sidebarList,pageTitle}) => {
                 <Collapse in={sidebarItem?.expanded} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
               {sidebarItem.submenu.map(child => (
-                            <ListItem button sx={{ pl: 4 }} key={child.module_name}>
+                            <ListItem button sx={{ pl: 4 }} key={child.module_name} onClick={()=>handleSidebarMenuClick(child,index)}>
                                 <ListItemIcon>
                                 <AlternateEmailIcon />
                                 </ListItemIcon>
