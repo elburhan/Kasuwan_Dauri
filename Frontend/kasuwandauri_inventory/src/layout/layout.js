@@ -113,13 +113,7 @@ const Layout = ({sidebarList,pageTitle}) => {
 
   const drawerWidth = 280;
   const handleSidebarMenuClick=(sidebarItem,index)=>{
-    if(sidebarItem.submenu && sidebarItem.submenu.length>0){/* 
-        if(sidebarItem.expanded){
-          sidebarItem.expanded=true;
-      }
-      sidebarItem.expanded=!sidebarItem.expanded;
-      sidebarItems[index]=sidebarItem;
-      setSidebarItems([...sidebarItems]) */
+    if(sidebarItem.submenu && sidebarItem.submenu.length>0){
       dispatch(expandItem({id:sidebarItem.id}))
     }
     else{
