@@ -1,3 +1,4 @@
+import { Expand } from '@mui/icons-material';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
@@ -13,7 +14,14 @@ const sidebarSlice = createSlice({
         status: 'idle',
         error: null,
     },
-    reducers: {},
+    reducers: {
+        expandItem: (state, action) => {
+            const item=state.items.find(item=>item.id==action.payload.id)
+            if(item){
+                item.expanded=!item.expanded;
+            }
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchSidebar.pending, (state) => {
