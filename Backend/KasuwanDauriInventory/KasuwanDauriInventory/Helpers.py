@@ -73,10 +73,11 @@ def parseDictToList(data):
     for key, value in data.items():
         values.extend(value)
     return values
-
 def renderResponse(data, message, status=200):
     if status >= 200 and status < 300:
-        return Response({'data': parseDictToList(data), 'message': message}, status=status)
+        if isinstance(data, dict):
+            data = parseDictToList(data)
+        return Response({'data': data, 'message': message}, status=status)
     else:
         if isinstance(data, dict):
             return Response({'error': data, 'message': message}, status=status)
@@ -84,6 +85,7 @@ def renderResponse(data, message, status=200):
             return Response({'error': {'message': data}, 'message': message}, status=status)
         else:
             return Response({'error': {'message': data}, 'message': message}, status=status)
+
 
 def custom_exception_handler(exc, context):
     response=exception_handler(exc,context)
