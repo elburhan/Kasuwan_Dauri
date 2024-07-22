@@ -3,7 +3,9 @@
 ```markdown
 # Kasuwan Dauri
 
-Kasuwan Dauri is an e-commerce platform designed to help local Hausa artisans sell their materials online. This project involves a comprehensive backend developed with Django, and it leverages various tools and libraries to provide a seamless user experience.
+Kasuwan Dauri is an e-commerce platform designed to help local Hausa artisans sell their materials online.
+This project involves a comprehensive backend developed with Django,
+ and it leverages various tools and libraries to provide a seamless user experience.
 
 ## Table of Contents
 
@@ -20,7 +22,9 @@ Kasuwan Dauri is an e-commerce platform designed to help local Hausa artisans se
 
 ## Project Description
 
-Kasuwan Dauri aims to digitize the local market experience for Hausa artisans, enabling them to reach a broader audience and sell their products online. The platform includes functionalities such as user authentication, product management, order processing, and more.
+Kasuwan Dauri aims to digitize the local market experience for Hausa artisans,
+enabling them to reach a broader audience and sell their products online. The platform includes functionalities such as user authentication
+, product management, order processing, and more.
 
 ## Technologies Used
 
