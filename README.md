@@ -1,6 +1,6 @@
 
 
-```markdown
+
 # Kasuwan Dauri
 
 Kasuwan Dauri is an e-commerce platform designed to help local Hausa artisans sell their materials online.
